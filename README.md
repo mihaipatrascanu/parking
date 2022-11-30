@@ -1,25 +1,42 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Parking system
+ Please use 
+ composer update
+ composer install
+ npm install
+ npm run dev
 
-## About Laravel
+ php artisan:migrate
+ php artisan db:seed
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+ For the local server I have used Xampp for the database and
+ php artisan serve
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+ After migration please register a user(no seed for the user model)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+ For the API documentation please visit http://127.0.0.1:8000/docs
+
+ Future Work:
+ The price of a spot is made in cents
+ For the moment is just generic 1000 cents.
+
+ Implementing the price for the summer/winter.
+
+ When a user is creating a reservation I have made an observer, 
+ maybe in the future we can use websockets.
+
+ I have also think that we can have a vehicle table to save the data
+ for the reservation there.
+
+ Also in the reservation table I have made a column 'status'->default(NULL)
+ here I want to change the status after the final price is made.
+
+ I have not implemented softdelete, just earasing a reservation if the status is NULL.
+ 
+
+
+
+
 
 ## Learning Laravel
 
