@@ -1,0 +1,434 @@
+openapi: 3.0.3
+info:
+  title: 'Parking System'
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+paths:
+  /api/user/register:
+    post:
+      summary: 'Create new user'
+      operationId: createNewUser
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'User name.'
+                  example: Mihai
+                email:
+                  type: string
+                  description: 'User email address.'
+                  example: mihai@mihai.com
+                password:
+                  type: string
+                  description: 'User password.'
+                  example: password
+                password_confirmation:
+                  type: string
+                  description: 'User password_confirmation.'
+                  example: password
+              required:
+                - name
+                - email
+                - password
+                - password_confirmation
+      security: []
+  /api/user/login:
+    post:
+      summary: 'Log a user into the app'
+      operationId: logAUserIntoTheApp
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'User email address.'
+                  example: mihai@mihai.com
+                password:
+                  type: string
+                  description: 'Users password.'
+                  example: password
+              required:
+                - email
+                - password
+      security: []
+  /api/parking:
+    get:
+      summary: 'Get all the info for a specific parking'
+      operationId: getAllTheInfoForASpecificParking
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  '/api/{parking_id}/spots':
+    get:
+      summary: 'Get all the spots available on the specific range'
+      operationId: getAllTheSpotsAvailableOnTheSpecificRange
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                datetime_range:
+                  type: object
+                  description: ''
+                  example: []
+                  properties:
+                    start:
+                      type: string
+                      description: 'Must be a valid date. Must be a date after or equal to <code>now</code>.'
+                      example: '2065-11-25'
+                    end:
+                      type: string
+                      description: 'Must be a valid date. Must be a date after <code>start</code>.'
+                      example: '1987-04-24'
+      security: []
+    parameters:
+      -
+        in: path
+        name: parking_id
+        description: 'The ID of the parking.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+      -
+        in: path
+        name: start
+        description: ''
+        example: '2022-12-01T00:00:00.000Z'
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: end
+        description: ''
+        example: '2022-12-02T00:00:00.000Z'
+        required: true
+        schema:
+          type: string
+  '/api/{parking}/days':
+    get:
+      summary: 'Get all the spots for a specific day'
+      operationId: getAllTheSpotsForASpecificDay
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: parking
+        description: ''
+        example: cupiditate
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: start
+        description: ''
+        example: '2022-12-01T00:00:00.000Z'
+        required: true
+        schema:
+          type: string
+      -
+        in: path
+        name: end
+        description: ''
+        example: '2022-12-02T00:00:00.000Z'
+        required: true
+        schema:
+          type: string
+  /api/reservation:
+    post:
+      summary: 'Create Reservation'
+      operationId: createReservation
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                start:
+                  type: string
+                  description: .
+                  example: '2022-12-04T00:00:00.000Z'
+                end:
+                  type: string
+                  description: .
+                  example: '2022-12-07T10:00:00.000Z'
+                spot_id:
+                  type: string
+                  description: .
+                  example: '3'
+                range:
+                  type: string
+                  description: ''
+                  example: null
+              required:
+                - start
+                - end
+                - spot_id
+      security: []
+  '/api/reservation/{reservation_id}':
+    post:
+      summary: 'Update Reservation'
+      operationId: updateReservation
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                start:
+                  type: string
+                  description: .
+                  example: '2022-12-04T00:00:00.000Z'
+                end:
+                  type: string
+                  description: .
+                  example: '2022-12-07T10:00:00.000Z'
+              required:
+                - start
+                - end
+      security: []
+    delete:
+      summary: 'Delete Reservation'
+      operationId: deleteReservation
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: reservation_id
+        description: 'The ID of the reservation.'
+        example: 2
+        required: true
+        schema:
+          type: integer
+  /api/user/logout:
+    post:
+      summary: 'Logout a user from the app'
+      operationId: logoutAUserFromTheApp
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+tags:
+  -
+    name: Endpoints
+    description: ''
